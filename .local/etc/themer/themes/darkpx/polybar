@@ -101,6 +101,11 @@ format = <label-state> <label-mode>
 ;format = <label-monitor> <label-state> <label-mode>
 ;pin-workspaces = false
 
+ws-icon-0 = term;
+ws-icon-1 = web;
+ws-icon-2 = code;
+ws-icon-3 = music;
+ws-icon-4 = irssi;
 ws-icon-default = x
 
 label-focused = o

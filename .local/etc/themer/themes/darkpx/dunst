@@ -23,7 +23,7 @@
     separator_color = auto
     startup_notification = false
     dmenu = /usr/bin/dmenu -p dunst:
-    browser = /home/jaagr/bin/apps/vimperator
+    browser = ~/bin/apps/vimperator
 
 [frame]
     width = 5
