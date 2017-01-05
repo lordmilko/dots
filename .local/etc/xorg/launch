@@ -11,6 +11,7 @@ function main
 {
   # Make $HOME the session root
   cd ~ || exit
+  mkdir -p "${XDG_CACHE_HOME}"/xorg
 
   # Slam a notice on the wall
   log::banner 30 " " "41;37"
