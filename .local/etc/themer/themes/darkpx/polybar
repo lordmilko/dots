@@ -106,9 +106,9 @@ ws-icon-1 = web;
 ws-icon-2 = code;
 ws-icon-3 = music;
 ws-icon-4 = irssi;
-ws-icon-default = x
+ws-icon-default = 
 
-label-focused = o
+label-focused = %icon%
 label-focused-background = #ee333333
 label-focused-underline= #cc333333
 label-focused-padding = 2
@@ -116,11 +116,11 @@ label-focused-padding = 2
 label-occupied = %{O-1}⏺%{O-1}
 label-occupied-padding = 2
 
-label-urgent = !
+label-urgent = %icon%
 label-urgent-background = #bd2c40
 label-urgent-padding = 2
 
-label-empty = x
+label-empty = %icon%
 label-empty-foreground = #444
 label-empty-padding = 2
 

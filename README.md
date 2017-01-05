@@ -13,11 +13,12 @@ This repo is a fork of jaagr's dotfile/themer configuration, complete with neces
 1. TODO: how to install all necessary packages
 2. rm -rf ~/* && rm -rf ~/.* # warning! this will delete everything in ~
 3. git clone --recursive https://github.com/lordmilko/dots ~/
-4. Run **wm_launcher**
-5. win+enter
-6. chmod +x ~/themer
-7. ~/themer space
-8. Edit ~/.profile and up the top swap the export MONITOR1 variable based on your distro. If you want to set this to something else, under X to **xrandr** and observe the output name
+4. Install fonts
+5. Run **wm_launcher**
+6. win+enter
+7. chmod +x ~/themer
+8. ~/themer space
+9. Edit ~/.profile and up the top swap the export MONITOR1 variable based on your distro. If you want to set this to something else, under X to **xrandr** and observe the output name
 
 ## Packages
 
@@ -29,8 +30,8 @@ This repo is a fork of jaagr's dotfile/themer configuration, complete with neces
 xbps-install rofi dunst compton
 
 # Fonts
-xbps-install -S font-awesome envypn-font
-xbps-install -S font-unifont-bdf #maybe?
+xbps-install -Sy font-awesome envypn-font
+xbps-install -Sy font-unifont-bdf #maybe?
 wget https://raw.githubusercontent.com/googlei18n/noto-fonts/master/hinted/NotoSans-Regular.ttf -P ~/.fonts/
 wget https://raw.githubusercontent.com/mozilla/Fira/master/ttf/FiraMono-Regular.ttf -P ~/.fonts/
 wget https://raw.githubusercontent.com/google/material-design-icons/master/iconfont/MaterialIcons-Regular.ttf -P ~/.fonts/
@@ -42,7 +43,7 @@ tar xvf termsyn-1.8.7.tar.gz
 mkdir ~/.fonts/termsyn
 mv termsyn-1.8.7/*.pcf ~/.fonts/termsyn/
 rm -rf termsyn-1.8.7*
-mkfontcache ~/.fonts/termsyn/
+mkfontdir ~/.fonts/termsyn/
 ```
 
 ### Fedora
