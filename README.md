@@ -52,6 +52,36 @@ mkfontdir ~/.fonts/termsyn/
 
 * Writeup how to install all necessary packages
 * Change vim colors to submodules if possible?
-	* How do you have a folder thats a submodule and a file under it that is in a different module
+    * How do you have a folder thats a submodule and a file under it that is in a different module
 * Fixup aliases
 * Remove ~/themer
+* Remove unnecessary vim themes
+
+## How it All Works
+
+wm_launcher -> bootstrap
+            -> X11(launch) -> xsession -> xsession.d\     -> 10-monitors
+                                                          -> 30-appearance  -> xresources/xresources(theme)
+                                                          -> 35-fonts
+                                                          -> 40-clipboard
+                                       -> dunst(launch)   -> dunstrc
+                                       -> compton(launch) -> compton.conf
+                                       -> sxhkd(launch)   -> sxhkd.sxhkdrc  -> sxhkd.bspwm
+                                       -> bspwm(launch)   -> bspwmrc        -> polybar(launch) => polybar(theme)
+                                                          => wallpaper(theme)
+                                                          => bspwm(theme)
+                                    
+
+Each module is loaded indirectly via a `launch` script. Each `launch` script prepares the environment for the module to be loaded. Each launch script is capable of being executed separately, however in normal operation they are chained together, starting with `wm_launcher`
+
+`wm_launcher` (`~/.local/bin/wm_launcher`) loads a copy of the script bootstrapper (Shell Script Loader), displays a countdown and then executes the X11 `launch` (`~/.local/etc/xorg/launch`) script.
+
+The X11 `launch` script initializes an X11 session using the `xsession` initialization script (`~/.local/etc/xorg/xsession`).
+
+The `xsession` script executes all session related scripts under the `xsession.d` subdirectory (`~/.local/etc/xorg/xsession.d`), and then executes the dunst, compton, sxhkd and bspwm `launch` scripts (`~/.local/etc/<name>/launch -> ~/.config/<name>/launch`).
+
+The bspwm `launch` script executes `bspwmrc` which in turn executes the polybar `launch` script. If a theme has been specified (`~/.local/etc/themer/current/bspwm`), bspwm will include that theme's settings in its bspwmrc
+
+The polybar `launch` runs polybar and generates a `.runargs` script that can be used to reload polybar via a shortcut if desired.
+
+When a theme is applied, the contents of themer/current directory (`~/.local/etc/themer/current/`) are replaced with symlinks to the components of the current theme (`~/.local/etc/themer/themes`)
