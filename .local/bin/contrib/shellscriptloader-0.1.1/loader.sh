@@ -852,7 +852,7 @@ if [ "$LOADER_ADVANCED" = true ]; then
 
 					return 0
 				elif [[ -f \$__ ]]; then
-					[ -r \"$__\" ] || loader_fail \"found file not readable: \$__\" loader_include_loop \"\$@\"
+					[ -r \$__ ] || loader_fail \"found file not readable: \$__\" loader_include_loop \"\$@\"
 
 					loader_flag_ \"\$1\"
 

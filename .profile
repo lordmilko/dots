@@ -2,6 +2,9 @@
 #
 # Defines runtime environment
 #
+export MONITOR1=Virtual=1 # Arch Linux
+#export MONITOR1=Virtual1 # Void Linux
+
 export LD_LIBRARY_PATH=/usr/lib/
 
 export LOCAL_ETC="${HOME}/.local/etc"

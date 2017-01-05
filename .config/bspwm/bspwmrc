@@ -47,23 +47,23 @@ bspc config ignore_ewmh_focus "${setting_ignore_ewmh_focus:-true}"
 # }}}
 # Monitors and desktops {{{
 
-mon_internal="eDP-1"
-mon_external="HDMI-1"
+#mon_internal="eDP-1"
+#mon_external="HDMI-1"
 
-if ! xrandr -q | grep -q "eDP-1"; then
-  mon_internal="eDP1"
-fi
+#if ! xrandr -q | grep -q "eDP-1"; then
+#  mon_internal="eDP1"
+#fi
 
-if ! xrandr -q | grep -q "HDMI-1"; then
-  mon_external="HDMI1"
-fi
+#if ! xrandr -q | grep -q "HDMI-1"; then
+#  mon_external="HDMI1"
+#fi
 
-if bspc monitor $mon_external; then
-  bspc monitor $mon_internal --reset-desktops term web code ws_4 ws_5 ws_6 ws_7 ws_8 music irssi
-  bspc monitor $mon_external --reset-desktops term web code ws_4 ws_5 ws_6 ws_7 ws_8 ws_9 ws_0
-else
-  bspc monitor $mon_internal --reset-desktops term web code ws_4 ws_5 ws_6 ws_7 ws_8 music irssi
-fi
+#if bspc monitor $mon_external; then
+#  bspc monitor $mon_internal --reset-desktops term web code ws_4 ws_5 ws_6 ws_7 ws_8 music irssi
+#  bspc monitor $mon_external --reset-desktops term web code ws_4 ws_5 ws_6 ws_7 ws_8 ws_9 ws_0
+#else
+  bspc monitor "$MONITOR1" --reset-desktops term web code ws_4 ws_5 ws_6 ws_7 ws_8 music irssi
+#fi
 
 bspc config pointer_follows_monitor "${setting_pointer_follow_monitor:-true}"
 #bspc config remove_unplugged_monitors "${setting_remove_unplugged_monitors:-true}"

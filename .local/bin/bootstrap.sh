@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source shellscriptloader-0.1.1.sh || exit 1
+source contrib/shellscriptloader-0.1.1/loader.sh || exit 1
 
 loader_addpath "$(dirname "${BASH_SOURCE[0]}")"
 

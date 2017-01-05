@@ -3,7 +3,7 @@ accent = #fba922
 
 [bar/top]
 enable-ipc = true
-monitor = eDP-1
+;monitor = ${env:MONITOR1}
 width = 100%
 height = 27
 
@@ -39,7 +39,7 @@ wm-restack = bspwm
 tray-position = right
 
 [bar/bottom]
-monitor = eDP-1
+;monitor = ${env:MONITOR1}
 bottom = true
 width = 100%
 height = 27
@@ -82,7 +82,7 @@ wm-restack = bspwm
 
 [bar/external]
 enable-ipc = true
-monitor = HDMI-1
+;monitor = ${env:MONITOR1}
 bottom = true
 ;dock = true
 width = ${bar/bottom.width}
