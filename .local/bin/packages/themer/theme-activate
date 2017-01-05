@@ -142,7 +142,7 @@ function main
   [[ -e ${CURRENT_DIR}/wallpaper ]] && {
     log::info "Setting wallpaper"
     chmod +x "${CURRENT_DIR}/wallpaper"
-	mkdir -p ~/.wallpapers
+    mkdir -p ~/.wallpapers
     bash "${CURRENT_DIR}/wallpaper" &>/dev/null &
   }
   [[ -e ${CURRENT_DIR}/xresources ]] && {
