@@ -10,7 +10,7 @@ This repo is a fork of jaagr's dotfile/themer configuration, complete with neces
 
 ## Installation
 
-1. <how to install all necessary packages>
-2. rm -rf ~/.* # warning! this will delete everything in ~
+1. TODO: how to install all necessary packages
+2. rm -rf ~/.* && rm -rf ~/* # warning! this will delete everything in ~
 3. git clone https://github.com/lordmilko/dots ~/
 4. Run **wm_launcher**
