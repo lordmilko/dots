@@ -58,20 +58,20 @@ mkfontdir ~/.fonts/termsyn/
 * Remove unnecessary vim themes
 
 ## How it All Works
-
+```
 wm_launcher -> bootstrap
             -> X11(launch) -> xsession -> xsession.d\     -> 10-monitors
-                                                          -> 30-appearance  -> xresources/xresources(theme)
+                                                          -> 30-appearance -> xresources/xresources(theme)
                                                           -> 35-fonts
                                                           -> 40-clipboard
                                        -> dunst(launch)   -> dunstrc
                                        -> compton(launch) -> compton.conf
-                                       -> sxhkd(launch)   -> sxhkd.sxhkdrc  -> sxhkd.bspwm
-                                       -> bspwm(launch)   -> bspwmrc        -> polybar(launch) => polybar(theme)
+                                       -> sxhkd(launch)   -> sxhkd.sxhkdrc -> sxhkd.bspwm
+                                       -> bspwm(launch)   -> bspwmrc       -> polybar(launch) => polybar(theme)
                                                           => wallpaper(theme)
                                                           => bspwm(theme)
                                     
-
+```
 Each module is loaded indirectly via a `launch` script. Each `launch` script prepares the environment for the module to be loaded. Each launch script is capable of being executed separately, however in normal operation they are chained together, starting with `wm_launcher`
 
 `wm_launcher` (`~/.local/bin/wm_launcher`) loads a copy of the script bootstrapper (Shell Script Loader), displays a countdown and then executes the X11 `launch` (`~/.local/etc/xorg/launch`) script.
