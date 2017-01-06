@@ -70,6 +70,7 @@ This repo is a fork of jaagr's dotfile/themer configuration, complete with neces
    syslinux-install_update -iam
    ```
 8. Set root password
+
    ``` sh
    passwd
    ```
@@ -87,7 +88,7 @@ This repo is a fork of jaagr's dotfile/themer configuration, complete with neces
    systemctl reboot
    ```
 
-10. Setup finalization
+10. When your system restarts, login and enter the following commands
 
    ```sh
    hostnamectl set-hostname arch-1
@@ -151,11 +152,14 @@ mkdir ~/.fonts/termsyn
 mv termsyn-1.8.7/*.pcf ~/.fonts/termsyn/
 rm -rf termsyn-1.8.7*
 mkfontdir ~/.fonts/termsyn/
+
+shutdown -r now
 ```
 Edit ~/.profile and make sure the Arch Linux MONITOR1 variable is the only MONITOR1 variable uncommented
 
 Launch WM and set your theme
 ```sh
+wm_launcher
 chmod +x ~/.local/bin/packages/themer/theme-activate
 ~/.local/bin/packages/themer/theme-activate darkpx
 ```
