@@ -42,75 +42,75 @@ This repo is a fork of jaagr's dotfile/themer configuration, complete with neces
 
 6. Format the partitions
 
-```sh
-mkswap /dev/sda3
-swapon /dev/sda3
-mkfs.ext4 /dev/sda1 -O \^64bit
-mkfs.ext4 /dev/sda2 -O \^64bit
-mount /dev/sda2 /mnt
-mkdir /mnt/boot
-mount /dev/sda1 /mnt/boot
-```
+   ```sh
+   mkswap /dev/sda3
+   swapon /dev/sda3
+   mkfs.ext4 /dev/sda1 -O \^64bit
+   mkfs.ext4 /dev/sda2 -O \^64bit
+   mount /dev/sda2 /mnt
+   mkdir /mnt/boot
+   mount /dev/sda1 /mnt/boot
+   ```
 7. Install Arch
 
-```sh
-# Install base
-pacstrap /mnt base
+   ```sh
+   # Install base
+   pacstrap /mnt base
 
-# Install bootloader
-pacstrap /mnt syslinux
-genfstab -p /mnt >> /mnt/etc/fstab
+   # Install bootloader
+   pacstrap /mnt syslinux
+   genfstab -p /mnt >> /mnt/etc/fstab
 
-# chroot into new system
-arch-chroot /mnt
-echo "blacklist intel_rapl" >> /etc/modprobe.d/blacklist.conf
+   # chroot into new system
+   arch-chroot /mnt
+   echo "blacklist intel_rapl" >> /etc/modprobe.d/blacklist.conf
 
-# Update boot config
-mkinitcpio -p linux
-syslinux-install_update -iam
-```
+   # Update boot config
+   mkinitcpio -p linux
+   syslinux-install_update -iam
+   ```
 8. Set root password
-``` sh
-passwd
-```
+   ``` sh
+   passwd
+   ```
 9. Update your syslinux config
-``` sh
-vi /boot/syslinux/syslinux.cfg
-```
+   ``` sh
+   vi /boot/syslinux/syslinux.cfg
+   ```
     Change the **TIMEOUT** from 50 to 3 (line 23)
 
     Under **LABEL arch** and **LABEL archfallback** change the disk from /dev/sda3 to /dev/sda2 (lines 54+60)
 
     Restart
-```sh
-umount /mnt/boot /mnt
-systemctl reboot
-```
+   ```sh
+   umount /mnt/boot /mnt
+   systemctl reboot
+   ```
 
 10. Setup finalization
 
-```sh
-hostnamectl set-hostname arch-1
-timedatectl set-timezone **<zone>**/**subzone** # use *timedatectl list-timezones to determine this*
-vi /etc/locale.gen #find and uncomment the two en_US ones
-locale-gen
-localectl set-locale LANG="en_US.UTF-8"
-```
-Check your hostname with `ip link` then enable dhcp, where `<interface>` is your network interface
-```sh
-systemctl enable dhcpcd@<interface>.service
-systemctl start dhcpcd@<interface>.service
-```
-Configure remote access
-```sh
-pacman -Sy openssh net-tools
-systemctl enable sshd.service
-vi /etc/sshd_config
-```
+   ```sh
+   hostnamectl set-hostname arch-1
+   timedatectl set-timezone **<zone>**/**subzone** # use *timedatectl list-timezones to determine this*
+   vi /etc/locale.gen #find and uncomment the two en_US ones
+   locale-gen
+   localectl set-locale LANG="en_US.UTF-8"
+   ```
+   Check your hostname with `ip link` then enable dhcp, where `<interface>` is your network interface
+   ```sh
+   systemctl enable dhcpcd@<interface>.service
+   systemctl start dhcpcd@<interface>.service
+   ```
+   Configure remote access
+   ```sh
+   pacman -Sy openssh net-tools
+   systemctl enable sshd.service
+   vi /etc/sshd_config
+   ```
 
-Under "#PermitRootLogin prohibit-password" add `PermitRootLogin yes`, then run `systemctl start sshd.service`
+   Under "#PermitRootLogin prohibit-password" add `PermitRootLogin yes`, then run `systemctl start sshd.service`
 
-Check your IP Address with `ifconfig` then SSH into your system
+   Check your IP Address with `ifconfig` then SSH into your system
 
 ##### Post Install Setup
 
@@ -199,77 +199,77 @@ shutdown -r now
 Log back in, run **ifconfig** to get your IP Address, SSH in and run the following commands
 
 ``` sh
-# utilities
-xbps-install -y bash git vim xorg rxvt-unicode zsh feh mpd wget
-ln -sf vim /usr/bin/vi
+   # utilities
+   xbps-install -y bash git vim xorg rxvt-unicode zsh feh mpd wget
+   ln -sf vim /usr/bin/vi
 
-# wm
-xbps-install -y bspwm sxhkd rofi dunst compton
+   # wm
+   xbps-install -y bspwm sxhkd rofi dunst compton
 
-# polybar (installed at the end)
-xbps-install -y gcc cmake make libX11-devel xcb-util-devel xcb-util-image-devel \
-    xcb-util-wm-devel alsa-lib-devel libmpdclient-devel wireless_tools-devel \
-    libcurl-devel libXft-devel pkg-config
-git clone --recursive https://github.com/jaagr/polybar
+   # polybar (installed at the end)
+   xbps-install -y gcc cmake make libX11-devel xcb-util-devel xcb-util-image-devel \
+       xcb-util-wm-devel alsa-lib-devel libmpdclient-devel wireless_tools-devel \
+       libcurl-devel libXft-devel pkg-config
+   git clone --recursive https://github.com/jaagr/polybar
 
-# termite (vte appears incompatible with latest void packages)
-#xbps-install -Sy git-all gcc make automake autoconf gtk-doc glib-devel vala-devel \
-#    gobject-introspection pkg-config intltool gettext-devel gnutls gtk+3 pango \
-#    gnutls-devel gtk+3-devel pango-devel gperf
-#mkdir build
-#cd build
-#git clone https://github.com/thestinger/vte-ng
-#cd vte-ng
-#./autogen.sh --prefix=/usr
-#make
-#make install
-#cd ..
-git clone --recursive https://github.com/thestinger/termite
-cd termite
-sed 's/PREFIX = \/usr\/local/PREFIX = \/usr/' -i Makefile
-make
-make install
-cd ~
-rm -rf ~/build
+   # termite (vte appears incompatible with latest void packages)
+   #xbps-install -Sy git-all gcc make automake autoconf gtk-doc glib-devel vala-devel \
+   #    gobject-introspection pkg-config intltool gettext-devel gnutls gtk+3 pango \
+   #    gnutls-devel gtk+3-devel pango-devel gperf
+   #mkdir build
+   #cd build
+   #git clone https://github.com/thestinger/vte-ng
+   #cd vte-ng
+   #./autogen.sh --prefix=/usr
+   #make
+   #make install
+   #cd ..
+   git clone --recursive https://github.com/thestinger/termite
+   cd termite
+   sed 's/PREFIX = \/usr\/local/PREFIX = \/usr/' -i Makefile
+   make
+   make install
+   cd ~
+   rm -rf ~/build
 
-# dots
-git clone --recursive https://github.com/lordmilko/dots
-shopt -s dotglob
-mv ~/dots/* ~/
-rm -rf ~/dots
+   # dots
+   git clone --recursive https://github.com/lordmilko/dots
+   shopt -s dotglob
+   mv ~/dots/* ~/
+   rm -rf ~/dots
 
-# Fonts
-xbps-install -Sy font-awesome envypn-font
-xbps-install -Sy font-unifont-bdf #maybe?
-wget https://raw.githubusercontent.com/googlei18n/noto-fonts/master/hinted/NotoSans-Regular.ttf -P ~/.fonts/
-wget https://raw.githubusercontent.com/mozilla/Fira/master/ttf/FiraMono-Regular.ttf -P ~/.fonts/
-wget https://raw.githubusercontent.com/google/material-design-icons/master/iconfont/MaterialIcons-Regular.ttf -P ~/.fonts/
-git clone https://github.com/sunaku/tamzen-font ~/.fonts/tamzen-font
-git clone https://github.com/stark/siji ~/.fonts/siji
-wget http://internode.dl.sourceforge.net/project/termsyn/termsyn-1.8.7.tar.gz
-tar xvf termsyn-1.8.7.tar.gz
-mkdir ~/.fonts/termsyn
-mv termsyn-1.8.7/*.pcf ~/.fonts/termsyn/
-rm -rf termsyn-1.8.7*
-mkfontdir ~/.fonts/termsyn/
+   # Fonts
+   xbps-install -Sy font-awesome envypn-font
+   xbps-install -Sy font-unifont-bdf #maybe?
+   wget https://raw.githubusercontent.com/googlei18n/noto-fonts/master/hinted/NotoSans-Regular.ttf -P ~/.fonts/
+   wget https://raw.githubusercontent.com/mozilla/Fira/master/ttf/FiraMono-Regular.ttf -P ~/.fonts/
+   wget https://raw.githubusercontent.com/google/material-design-icons/master/iconfont/MaterialIcons-Regular.ttf -P ~/.fonts/
+   git clone https://github.com/sunaku/tamzen-font ~/.fonts/tamzen-font
+   git clone https://github.com/stark/siji ~/.fonts/siji
+   wget http://internode.dl.sourceforge.net/project/termsyn/termsyn-1.8.7.tar.gz
+   tar xvf termsyn-1.8.7.tar.gz
+   mkdir ~/.fonts/termsyn
+   mv termsyn-1.8.7/*.pcf ~/.fonts/termsyn/
+   rm -rf termsyn-1.8.7*
+   mkfontdir ~/.fonts/termsyn/
 
-# finalization
-chmod +x ~/.local/bin/packages/themer/theme-activate
-mv ~/.bash_profile ~/.bash_profile.old
-mv ~/.bashrc ~/.bashrc.old
-shutdown -r now
-```
-Build polybar
-``` sh
-cd polybar
-./build.sh #yes to everything but the first question (i3) and the last question (install example config)
-```
-``` sh
-# Launch wm
-wm_launcher
-# set theme
-~/.local/bin/packages/themer/theme-activate darkpx
-```
+   # finalization
+   chmod +x ~/.local/bin/packages/themer/theme-activate
+   mv ~/.bash_profile ~/.bash_profile.old
+   mv ~/.bashrc ~/.bashrc.old
+   shutdown -r now
+   ```
+   Build polybar
+   ``` sh
+   cd polybar
+   ./build.sh #yes to everything but the first question (i3) and the last question (install example config)
+   ```
+   ``` sh
+   # Launch wm
+   wm_launcher
+   # set theme
+   ~/.local/bin/packages/themer/theme-activate darkpx
+   ```
 
 ### Fedora
 
