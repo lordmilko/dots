@@ -2,13 +2,13 @@ This repo is a fork of jaagr's dotfile/themer configuration, complete with neces
 
 [Incomplete]
 
-## Enhancements
+# Enhancements
 * Creates gitignored directories (.cache, .wallpapers)
 * Includes vim color schemes
 * Includes necessary shell scripts/bugfixes
 * Removes settings specific to jaagr's PC
 
-## Rough Notes
+# Rough Notes
 
 1. TODO: how to install all necessary packages
 2. rm -rf ~/* && rm -rf ~/.* # warning! this will delete everything in ~
@@ -20,11 +20,11 @@ This repo is a fork of jaagr's dotfile/themer configuration, complete with neces
 8. ~/themer space
 9. Edit ~/.profile and up the top swap the export MONITOR1 variable based on your distro. If you want to set this to something else, under X do **xrandr** and observe the output name
 
-## Packages
+# Packages
 
-### Arch Linux
+## Arch Linux
 
-#### Initial Setup
+### Initial Setup
 
 1. Download the latest Arch ISO, or use the [netboot installer](https://releng.archlinux.org/pxeboot/ipxe.iso)
 2. Create a new VM with the following specs:
@@ -112,7 +112,7 @@ This repo is a fork of jaagr's dotfile/themer configuration, complete with neces
 
    Check your IP Address with `ifconfig` then SSH into your system
 
-##### Post Install Setup
+#### Post Install Setup
 
 Run the following commands
 
@@ -160,7 +160,7 @@ chmod +x ~/.local/bin/packages/themer/theme-activate
 ~/.local/bin/packages/themer/theme-activate darkpx
 ```
 
-### Void Linux
+## Void Linux
 
 *termite is currently incompatible with Void Linux. urxvt can be opened once setup has completed via win+shift+enter*
 
@@ -271,9 +271,9 @@ Log back in, run **ifconfig** to get your IP Address, SSH in and run the followi
    ~/.local/bin/packages/themer/theme-activate darkpx
    ```
 
-### Fedora
+## Fedora
 
-## Todo
+# Todo
 
 * Writeup how to install all necessary packages
 * zsh theme looks wrong
@@ -285,7 +285,7 @@ Log back in, run **ifconfig** to get your IP Address, SSH in and run the followi
 * Writeup zsh config works. it goes to zshrc, which gives us the .zsh folder, .zshrc, which runs all the zshrc.d files and sets the theme to jaagr. doesnt that conflict with the file zshrc.d/30-theme.zsh? whats meant to go in these $CURRENT_THEME/zsh files then!
 * I think the #compdef in the _themer file indicates its related to zsh! check that out. somehow related to the zsh completion system?
 
-## How it All Works
+# How it All Works
 ```
 wm_launcher -> bootstrap
             -> X11(launch) -> xsession -> xsession.d\     -> 10-monitors
