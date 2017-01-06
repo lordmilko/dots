@@ -35,7 +35,7 @@ This repo is a fork of jaagr's dotfile/themer configuration, complete with neces
     * OS: Linux/Other 3.x or Later (64-bit)
 
 3. Boot the disk
-4. If booted from the netboot ISO, run `ping google.com` to confirm DNS is working. If DNS is not working, run `echo "nameserver 8.8.8.8"` >> /etc/resolv.conf
+4. If booted from the netboot ISO, run `ping google.com` to confirm DNS is working. If DNS is not working, run `echo "nameserver 8.8.8.8" >> /etc/resolv.conf`
 5. Run `cfdisk /dev/sda` and configure your disk by selecting the following:
 
     Partition: dos, New, 512M, primary, bootable, down arrow, New, 27.5G, primary, down arrow, New, 2G, primary, Write, yes, Quit
