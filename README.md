@@ -126,7 +126,7 @@ rm apacman
 apacman -S apacman-deps --noconfirm
 
 # utilities
-pacman -S git bspwm sxhkd wget rxvt-unicode vim rofi dunst compton zsh feh mpd termite autocutsel dash neovim --noconfirm
+pacman -S git bspwm sxhkd wget rxvt-unicode vim rofi dunst compton zsh feh mpd termite autocutsel dash neovim vim-airline --noconfirm
 apacman -S polybar
 pacman -R vi --noconfirm
 apacman -S vi-vim-symlink --noconfirm
@@ -277,6 +277,11 @@ Log back in, run **ifconfig** to get your IP Address, SSH in and run the followi
 
 ## Fedora
 
+If you'd like to have normal network interface names, before booting the install disk hit tab to edit the boot options, enter a space followed by `net.ifnames=0`
+
+Under System, accept the installation destination and enter a hostname. Wait for the installation source to load, then under software selection select Minimal Install
+
+
 # Todo
 
 * Writeup how to install all necessary packages
@@ -288,6 +293,8 @@ Log back in, run **ifconfig** to get your IP Address, SSH in and run the followi
 * Remove unnecessary vim themes
 * Writeup zsh config works. it goes to zshrc, which gives us the .zsh folder, .zshrc, which runs all the zshrc.d files and sets the theme to jaagr. doesnt that conflict with the file zshrc.d/30-theme.zsh? whats meant to go in these $CURRENT_THEME/zsh files then!
 * I think the #compdef in the _themer file indicates its related to zsh! check that out. somehow related to the zsh completion system?
+* Vim airline themes. Does vim have a package manager? (https://github.com/vim-airline/vim-airline-themes)
+* Remove colors- folder from .vim
 
 # How it All Works
 ```
