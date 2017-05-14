@@ -119,15 +119,15 @@ Run the following commands
 
 ```sh
 # apacman
-pacman -S --needed --asdeps jshon
+pacman -Sy --needed --asdeps jshon
 curl -O "https://raw.githubusercontent.com/oshazard/apacman/master/apacman"
 bash ./apacman -S apacman --noconfirm
 rm apacman
 apacman -S apacman-deps --noconfirm
 
 # utilities
-pacman -S git bspwm sxhkd wget rxvt-unicode vim rofi dunst compton zsh feh mpd termite autocutsel dash neovim vim-airline --noconfirm
-apacman -S polybar
+pacman -Sy git bspwm sxhkd wget rxvt-unicode vim rofi dunst compton zsh feh mpd termite autocutsel dash neovim vim-airline
+apacman -S polybar vimperator --noconfirm # note: firefox may block vimperator as an unverified addon
 pacman -R vi --noconfirm
 apacman -S vi-vim-symlink --noconfirm
 
@@ -156,6 +156,8 @@ mkfontdir ~/.fonts/termsyn/
 shutdown -r now
 ```
 Edit ~/.profile and make sure the Arch Linux MONITOR1 variable is the only MONITOR1 variable uncommented
+
+If installing on a real machine, you can run `find /sys -name edid` to get an idea as to what the monitor name may need to be; otherwise you can use `xrandr` after starting X11 to get the actual name
 
 Launch WM and set your theme
 ```sh
