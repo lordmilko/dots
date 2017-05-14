@@ -9,7 +9,7 @@ echo "#################################################################"
 echo "Configuring bootloader"
 mkinitcpio -p linux
 syslinux-install_update -iam
-sed -i "s/TIMEOUT 50/TIMEOUT 3/g" /boot/syslinux/syslinux.cfg
+sed -i "s/TIMEOUT 50/TIMEOUT 5/g" /boot/syslinux/syslinux.cfg
 sed -i "s/APPEND root=\/dev\/sda3/APPEND root=\/dev\/sda2/g" /boot/syslinux/syslinux.cfg
 
 echo "#################################################################"

@@ -52,138 +52,7 @@ Determine the timezone you wish to use with timedatectl list-timezones, then run
 ```sh
 ./ArchPostSetup.sh
 ```
-
----------
-
-### Initial Setup
-
-1. Download the latest Arch ISO, or use the [netboot installer](https://releng.archlinux.org/pxeboot/ipxe.iso)
-2. Create a new VM with the following specs:
-
-    * CPU: 2
-    * RAM: 2GB
-    * HDD: 30GB
-    * OS: Linux/Other 3.x or Later (64-bit)
-
-3. Boot the disk
-4. If booted from the netboot ISO, run `ping google.com` to confirm DNS is working. If DNS is not working, run `echo "nameserver 8.8.8.8" >> /etc/resolv.conf`
-5. Run `cfdisk /dev/sda` and configure your disk by selecting the following:
-
-    Partition: dos, New, 512M, primary, bootable, down arrow, New, 27.5G, primary, down arrow, New, 2G, primary, Write, yes, Quit
-
-6. Format the partitions
-
-   ```sh
-   mkswap /dev/sda3
-   swapon /dev/sda3
-   mkfs.ext4 /dev/sda1 -O \^64bit
-   mkfs.ext4 /dev/sda2 -O \^64bit
-   mount /dev/sda2 /mnt
-   mkdir /mnt/boot
-   mount /dev/sda1 /mnt/boot
-   ```
-7. Install Arch
-
-   ```sh
-   # Install base
-   pacstrap /mnt base
-
-   # Install bootloader
-   pacstrap /mnt syslinux
-   genfstab -p /mnt >> /mnt/etc/fstab
-
-   # chroot into new system
-   arch-chroot /mnt
-   echo "blacklist intel_rapl" >> /etc/modprobe.d/blacklist.conf
-
-   # Update boot config
-   mkinitcpio -p linux
-   syslinux-install_update -iam
-   ```
-8. Set root password
-
-   ``` sh
-   passwd
-   ```
-9. Update your syslinux config
-   ``` sh
-   vi /boot/syslinux/syslinux.cfg
-   ```
-    Change the **TIMEOUT** from 50 to 3 (line 23)
-
-    Under **LABEL arch** and **LABEL archfallback** change the disk from /dev/sda3 to /dev/sda2 (lines 54+60)
-
-    Restart
-   ```sh
-   umount /mnt/boot /mnt
-   systemctl reboot
-   ```
-
-10. When your system restarts, login and enter the following commands
-
-   ```sh
-   hostnamectl set-hostname arch-1
-   timedatectl set-timezone **<zone>**/**subzone** # use *timedatectl list-timezones to determine this*
-   vi /etc/locale.gen #find and uncomment the two en_US ones
-   locale-gen
-   localectl set-locale LANG="en_US.UTF-8"
-   ```
-   Check your hostname with `ip link` then enable dhcp, where `<interface>` is your network interface
-   ```sh
-   systemctl enable dhcpcd@<interface>.service
-   systemctl start dhcpcd@<interface>.service
-   ```
-   Configure remote access
-   ```sh
-   pacman -Sy openssh net-tools
-   systemctl enable sshd.service
-   vi /etc/sshd_config
-   ```
-
-   Under "#PermitRootLogin prohibit-password" add `PermitRootLogin yes`, then run `systemctl start sshd.service`
-
-   Check your IP Address with `ifconfig` then SSH into your system
-
-#### Post Install Setup
-
-Run the following commands
-
 ```sh
-# apacman
-pacman -Sy --needed --asdeps jshon
-curl -O "https://raw.githubusercontent.com/oshazard/apacman/master/apacman"
-bash ./apacman -S apacman --noconfirm
-rm apacman
-apacman -S apacman-deps --noconfirm
-
-# utilities
-pacman -Sy git bspwm sxhkd wget rxvt-unicode vim rofi dunst compton zsh feh mpd termite autocutsel dash neovim vim-airline
-apacman -S polybar vimperator --noconfirm # note: firefox may block vimperator as an unverified addon
-pacman -R vi --noconfirm
-apacman -S vi-vim-symlink --noconfirm
-
-# X11
-pacman -S xorg-server xorg-xinit xorg-server-utils libinput --noconfirm
-
-# dots
-git clone --recursive https://github.com/lordmilko/dots
-shopt -s dotglob
-mv ~/dots/* ~/
-rm -rf ~/dots
-
-# Fonts
-mkdir -p ~/.fonts
-pacman -S ttf-fira-mono --noconfirm
-apacman -S ttf-unifont ttf-font-awesome tamzen-font-git envypn-font ttf-material-icons --noconfirm #do we maybe want the bdf unifont one?
-git clone https://github.com/stark/siji ~/.fonts/siji
-wget https://raw.githubusercontent.com/googlei18n/noto-fonts/master/hinted/NotoSans-Regular.ttf -P ~/.fonts/ # ttf-noto on AUR is over 400mb, and requires a very large /tmp
-wget http://internode.dl.sourceforge.net/project/termsyn/termsyn-1.8.7.tar.gz
-tar xvf termsyn-1.8.7.tar.gz
-mkdir ~/.fonts/termsyn
-mv termsyn-1.8.7/*.pcf ~/.fonts/termsyn/
-rm -rf termsyn-1.8.7*
-mkfontdir ~/.fonts/termsyn/
-
 shutdown -r now
 ```
 Edit ~/.profile and make sure the Arch Linux MONITOR1 variable is the only MONITOR1 variable uncommented
@@ -193,7 +62,6 @@ If installing on a real machine, you can run `find /sys -name edid` to get an id
 Launch WM and set your theme
 ```sh
 wm_launcher
-chmod +x ~/.local/bin/packages/themer/theme-activate
 ~/.local/bin/packages/themer/theme-activate darkpx
 ```
 
