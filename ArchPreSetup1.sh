@@ -56,19 +56,22 @@ mkdir /mnt/boot
 mount /dev/sda1 /mnt/boot
 
 echo "#################################################################"
-echo "Installing arch"
+echo "Installing Base"
 pacstrap /mnt base
 
 echo "#################################################################"
-echo "Installing bootloader"
+echo "Installing Bootloader"
 pacstrap /mnt syslinux
 genfstab -p /mnt >> /mnt/etc/fstab
 
 echo "Downloading Stage 2 Script"
 curl -O https://raw.githubusercontent.com/lordmilko/dots/master/ArchPreSetup2.sh
+curl -O https://raw.githubusercontent.com/lordmilko/dots/master/ArchPostSetup.sh
 
 cp ./ArchPreSetup2.sh /mnt/root/ArchPreSetup2.sh
+cp ./ArchPostSetup.sh /mnt/root/ArchPostSetup.sh
 chmod +x /mnt/root/ArchPreSetup2.sh
+chmod +x /mnt/root/ArchPostSetup.sh
 
 echo "#################################################################"
 echo "Entering new filesystem"

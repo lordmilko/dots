@@ -31,7 +31,7 @@ Create a new VM with the following specs:
     * HDD: 30GB
     * OS: Linux/Other 3.x or Later (64-bit)
 	
-Boot the Arch Linux installation disk
+Boot the Arch Linux installation disk, then run
 
 ```sh
 curl -O https://raw.githubusercontent.com/lordmilko/dots/master/ArchPreSetup1.sh
@@ -39,14 +39,18 @@ chmod +x ./ArchPreSetup1.sh
 ./ArchPreSetup1.sh
 ```
 ```sh
-arch-chroot /mnt
 cd ~
 ./ArchPreSetup2.sh
 ```
-Enter a password
+Enter a password, then run
 ```sh
 exit
 systemctl reboot
+```
+Determine the timezone you wish to use with timedatectl list-timezones, then run
+
+```sh
+./ArchPostSetup.sh
 ```
 
 ---------
