@@ -24,6 +24,33 @@ This repo is a fork of jaagr's dotfile/themer configuration, complete with neces
 
 ## Arch Linux
 
+Create a new VM with the following specs:
+
+    * CPU: 2
+    * RAM: 2GB
+    * HDD: 30GB
+    * OS: Linux/Other 3.x or Later (64-bit)
+	
+Boot the Arch Linux installation disk
+
+```sh
+curl -O https://raw.githubusercontent.com/lordmilko/dots/master/ArchPreSetup1.sh
+chmod +x ./ArchPreSetup1.sh
+./ArchPreSetup1.sh
+```
+```sh
+arch-chroot /mnt
+cd ~
+./ArchPreSetup2.sh
+```
+Enter a password
+```sh
+exit
+systemctl reboot
+```
+
+---------
+
 ### Initial Setup
 
 1. Download the latest Arch ISO, or use the [netboot installer](https://releng.archlinux.org/pxeboot/ipxe.iso)
