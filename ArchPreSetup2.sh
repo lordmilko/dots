@@ -2,7 +2,6 @@
 
 echo "#################################################################"
 echo "Blacklisting drivers"
-arch-chroot /mnt
 echo "blacklist intel_rapl" >> /etc/modprobe.d/blacklist.conf
 
 echo "#################################################################"

@@ -65,6 +65,8 @@ wm_launcher
 ~/.local/bin/packages/themer/theme-activate darkpx
 ```
 
+If you encounter any issue during WM startup, logs can be found under `~/.cache`
+
 ## Void Linux
 
 *termite is currently incompatible with Void Linux. urxvt can be opened once setup has completed via win+shift+enter*
@@ -196,6 +198,7 @@ Under System, accept the installation destination and enter a hostname. Wait for
 * I think the #compdef in the _themer file indicates its related to zsh! check that out. somehow related to the zsh completion system?
 * Vim airline themes. Does vim have a package manager? (https://github.com/vim-airline/vim-airline-themes)
 * Remove colors- folder from .vim
+* When you open something in darkpx and go to a different desktop, you get a circle instead of a custom icon. Go back to the theme the original icons came from and see how it handled it
 
 # How it All Works
 ```
